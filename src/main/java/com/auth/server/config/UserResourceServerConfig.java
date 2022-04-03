@@ -2,6 +2,7 @@ package com.auth.server.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
@@ -25,10 +26,11 @@ private static final String RESOURCE_ID = "user-resource";
 
 
 		http
-		.anonymous().disable()
-		.authorizeRequests().antMatchers("/").authenticated()
-		.and()
-		.exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+		.authorizeRequests().antMatchers("/add**").permitAll()
+                .antMatchers("/users**")
+                .authenticated().anyRequest().authenticated();
 
 
 

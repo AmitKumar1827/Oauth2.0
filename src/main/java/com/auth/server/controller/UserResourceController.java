@@ -25,7 +25,6 @@ import com.auth.server.model.User;
 
 
 @RestController
-@RequestMapping("/v1")
 public class UserResourceController {
 
 	
@@ -38,7 +37,7 @@ public class UserResourceController {
 	Logger log=LoggerFactory.getLogger(UserResourceController.class);
 	
 	
-	@PostMapping(value="/users/addUser")
+	@PostMapping(value="/add")
 	public ResponseEntity<String> saveuser(@RequestBody User user ) {
 		User user1 = new User();
 		user1 = user;
